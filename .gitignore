@@ -108,3 +108,8 @@ __tests__/runner/*
 linter.yml
 
 !.vscode/extensions.json
+
+# Ignore everything in the example directory but .prp.* files
+
+example/**
+!example/*.prp.*
