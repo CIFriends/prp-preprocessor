@@ -25793,8 +25793,9 @@ function processFiles(params) {
         const readFile = fsModule.readFileSync(file, {
             encoding: encodings
         });
-        if (!readFile)
+        if (!readFile) {
             throw new Error(`Error reading file: ${file}`);
+        }
         const content = replaceVariables(variables, readFile);
         const newFile = file.replace(extension, "");
         fs_1.default.writeFileSync(newFile, content, { encoding: encodings });
@@ -25802,10 +25803,11 @@ function processFiles(params) {
 }
 exports.processFiles = processFiles;
 function replaceVariables(variables, content) {
+    let newContent = content;
     variables.forEach((value, key) => {
-        content = content.replaceAll(new RegExp(`\\{\\s*_\\s*${key.trim()}\\s*_\\s*\\}`, "g"), value);
+        newContent = newContent.replaceAll(new RegExp(`\\{\\s*_\\s*${key.trim()}\\s*_\\s*\\}`, "g"), value);
     });
-    return content;
+    return newContent;
 }
 exports.replaceVariables = replaceVariables;
 
