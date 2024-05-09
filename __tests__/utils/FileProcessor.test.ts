@@ -5,6 +5,8 @@ jest.mock("fs", () => ({
   promises: {
     access: jest.fn()
   },
+  readFileSync: jest.fn(),
+  writeFileSync: jest.fn()
 }));
 
 describe('FileProcessor', () => {

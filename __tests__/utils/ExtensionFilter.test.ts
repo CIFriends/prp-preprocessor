@@ -10,12 +10,8 @@ jest.mock("fs", () => ({
   statSync: jest.fn()
 }));
 
-jest.mock("path", () => ({
-  join: jest.fn()
-}));
-
 const mockedFs = fs as jest.Mocked<typeof fs>;
-const mockedPath = path as jest.Mocked<typeof path>;
+const mockedPath = path;
 describe("getFilesByExtension", () => {
   beforeEach(() => {
     // Clear all instances and calls to constructor and all methods:
@@ -40,17 +36,20 @@ describe("getFilesByExtension", () => {
     mockedFs.readdirSync.mockReturnValueOnce([
       {
         name: "subdir",
-        isDirectory: () => true
+        isDirectory: () => true,
+        isFile: () => false
       },
       {
         name: "file1.prp.ts",
-        isDirectory: () => false
+        isDirectory: () => false,
+        isFile: () => true
       }
     ] as fs.Dirent[]);
     mockedFs.readdirSync.mockReturnValueOnce([
       {
         name: "file2.prp.ts",
-        isDirectory: () => false
+        isDirectory: () => false,
+        isFile: () => true
       }
     ] as fs.Dirent[]);
 
@@ -58,11 +57,9 @@ describe("getFilesByExtension", () => {
       isDirectory: () => false
     } as fs.Stats);
 
-    mockedPath.join.mockImplementation((...paths: string[]) => paths.join("/"));
-
     const files = getFilesByExtension({ dir, extension, fsModule: mockedFs, pathModule: mockedPath });
 
-    expect(files).toEqual(["./subdir/file2.prp.ts", "./file1.prp.ts"]);
+    expect(files).toEqual(["subdir\\file2.prp.ts", "file1.prp.ts"]);
   });
 
   it("should throw an error when the directory does not exist", () => {
@@ -89,19 +86,23 @@ describe("getFilesByExtension", () => {
     mockedFs.readdirSync.mockReturnValue([
       {
         name: "file1.ts",
-        isDirectory: () => false
+        isDirectory: () => false,
+        isFile: () => true
       },
       {
         name: "file2.js",
-        isDirectory: () => false
+        isDirectory: () => false,
+        isFile: () => true
       },
       {
         name: "file3.prp.ts",
-        isDirectory: () => false
+        isDirectory: () => false,
+        isFile: () => true
       },
       {
         name: "file3.prp.md",
-        isDirectory: () => false
+        isDirectory: () => false,
+        isFile: () => true
       }
     ] as fs.Dirent[]);
 
@@ -110,11 +111,8 @@ describe("getFilesByExtension", () => {
       isDirectory: () => false
     } as fs.Stats);
 
-    // Mock path.join to return the file path
-    mockedPath.join.mockImplementation((...paths: string[]) => paths.join("/"));
-
     const files = getFilesByExtension({ dir, extension, fsModule: mockedFs, pathModule: mockedPath });
 
-    expect(files).toEqual(["./file3.prp.ts", "./file3.prp.md"]);
+    expect(files).toEqual(["file3.prp.ts", "file3.prp.md"]);
   });
 });

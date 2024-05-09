@@ -5,14 +5,7 @@ export function processFiles(params: FilesParams): void {
   const { files, encodings, variables, fsModule = fs, extension } = params;
 
   files.forEach(file => {
-    try {
       processFile(file);
-    } catch (error) {
-      core.error(`Error processing file: ${file}`);
-      if (error instanceof Error) {
-        core.error(error.message);
-      }
-    }
   });
 
   function processFile(file: string) {
