@@ -1,16 +1,34 @@
-name: "typescript action template"
+name: "Preprocessor"
 description: "Example GitHub Action written in TypeScript"
 branding:
   icon: "book-open"
   color: "white"
 inputs:
-  who-to-greet: # id of input
-    description: "Who to greet"
+  rootDir:
+    description: "Root directory"
     required: true
-    default: "World"
-outputs:
-  message: # id of output
-    description: "The greeting"
+    default: "."
+  extension:
+    description: "Preprocess files with this pre-extension"
+    required: true
+    default: ".prp"
+  encoding:
+    description: "Encoding of the files"
+    required: true
+    default: "utf8"
+  ignoredVars:
+    description: "Ignore these variables"
+    required: false
+    default: ""
+  ignoredDirs:
+    description: "Ignore these directories"
+    required: false
+    default: ""
+  includeSubDirs:
+    description: "Include subdirectories"
+    required: false
+    default: "true"
+
 runs:
   using: "node20"
   main: "dist/index.js"

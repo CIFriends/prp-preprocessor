@@ -1,20 +1,29 @@
 import * as core from "@actions/core";
+import { getFilesByExtension } from "./utils/ExtensionFilter";
+import { InputParams } from "./utils/VariableManager";
+import { SEARCH_TEXT } from "./utils/texts";
+import { processFiles } from "./utils/FileProcessor";
 
 /**
  * The main function for the action.
+ * @param {InputParams} inputParams - The input parameters for the action.
  * @returns {void} Resolves when the action is complete.
  */
-export function run(): void {
-  try {
-    const who: string = core.getInput("who-to-greet");
+export function run(inputParams: InputParams): void {
+  const { rootDir, extension, envVars, ignoredDir, includeSubDir, encodings } =
+    inputParams;
+  core.debug(SEARCH_TEXT(extension, rootDir));
+  const files: string[] = getFilesByExtension({
+    dir: rootDir,
+    extension,
+    ignoredDir,
+    includeSubDir
+  });
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Greeting ${who}... at ${new Date().toTimeString()}`);
-
-    // Set outputs for other workflow steps to use
-    core.setOutput("message", `Hello, ${who}!`);
-  } catch (error) {
-    // Fail the workflow run if an error occurs
-    if (error instanceof Error) core.setFailed(error.message);
+  if (files.length === 0) {
+    core.warning(`No files found with extension ${extension} in ${rootDir}`);
+    return;
   }
+
+  processFiles({ files, variables: envVars, encodings, extension });
 }
