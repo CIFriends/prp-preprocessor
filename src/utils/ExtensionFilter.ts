@@ -87,8 +87,8 @@ interface GetFilesParams {
  */
 function generateRegex(extension: string): RegExp {
   const extensionPattern: string = extension
-    .replace(".", "\\.")
-    .replace("*", ".*");
+    .replaceAll(".", "\\.")
+    .replaceAll("*", ".*");
   return new RegExp(extensionPattern + "$");
 }
 
