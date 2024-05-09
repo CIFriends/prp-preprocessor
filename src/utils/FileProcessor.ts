@@ -1,5 +1,4 @@
 import fs from "fs";
-import * as core from "@actions/core";
 
 export function processFiles(params: FilesParams): void {
   const { files, encodings, variables, fsModule = fs, extension } = params;
