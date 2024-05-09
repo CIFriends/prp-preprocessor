@@ -29,7 +29,7 @@ export function replaceVariables(
 ): string {
   let newContent: string = content.toString();
   variables.forEach((value, key) => {
-    newContent = newContent.replace(
+    newContent = newContent.replaceAll(
       new RegExp(`\\{\\s*_\\s*${key.trim()}\\s*_\\s*\\}`, "g"),
       value
     );
