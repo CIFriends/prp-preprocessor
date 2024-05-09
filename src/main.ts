@@ -3,6 +3,7 @@ import { getFilesByExtension } from "./utils/ExtensionFilter";
 import { InputParams } from "./utils/VariableManager";
 import { SEARCH_TEXT } from "./utils/texts";
 import { processFiles } from "./utils/FileProcessor";
+import path from "path";
 
 /**
  * The main function for the action.
@@ -14,7 +15,7 @@ export function run(inputParams: InputParams): void {
     inputParams;
   core.debug(SEARCH_TEXT(extension, rootDir));
   const files: string[] = getFilesByExtension({
-    dir: rootDir,
+    dir: path.join(rootDir),
     extension,
     ignoredDir,
     includeSubDir
