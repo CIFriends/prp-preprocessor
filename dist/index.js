@@ -25805,7 +25805,7 @@ exports.processFiles = processFiles;
 function replaceVariables(variables, content) {
     let newContent = content.toString();
     variables.forEach((value, key) => {
-        newContent = newContent.replace(new RegExp(`\\{\\s*_\\s*${key.trim()}\\s*_\\s*\\}`, "g"), value);
+        newContent = newContent.replaceAll(new RegExp(`\\{\\s*_\\s*${key.trim()}\\s*_\\s*\\}`, "g"), value);
     });
     return newContent;
 }
