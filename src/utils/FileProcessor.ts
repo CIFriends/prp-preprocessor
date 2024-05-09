@@ -12,7 +12,9 @@ export function processFiles(params: FilesParams): void {
       encoding: encodings as BufferEncoding
     });
 
-    if (!readFile) throw new Error(`Error reading file: ${file}`);
+    if (!readFile) {
+      throw new Error(`Error reading file: ${file}`);
+    }
 
     const content: string = replaceVariables(variables, readFile);
     const newFile: string = file.replace(extension, "");
@@ -25,13 +27,14 @@ export function replaceVariables(
   variables: Map<string, string>,
   content: string
 ): string {
+  let newContent: string = content;
   variables.forEach((value, key) => {
-    content = content.replaceAll(
+    newContent = newContent.replaceAll(
       new RegExp(`\\{\\s*_\\s*${key.trim()}\\s*_\\s*\\}`, "g"),
       value
     );
   });
-  return content;
+  return newContent;
 }
 
 export interface FilesParams {
