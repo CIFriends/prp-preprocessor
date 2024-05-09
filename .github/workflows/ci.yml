@@ -51,7 +51,7 @@ jobs:
 
   test-action:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: Test action
     steps:
       # To use this repository's private action,
       # you must check out the repository
@@ -62,11 +62,11 @@ jobs:
         uses: pnpm/action-setup@v3
       - name: Install dependencies and build
         run: pnpm run preflight
-      - name: Hello world action step
+      - name: Process files
         uses: ./ # Uses an action in the root directory
-        id: hello
+        id: process
         with:
-          who-to-greet: "Mona the Octocat"
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+            rootDir: './example'
+
+        env:
+          EXAMPLE: 'World'
