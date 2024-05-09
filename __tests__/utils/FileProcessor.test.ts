@@ -1,7 +1,11 @@
 import { FilesParams, processFiles, replaceVariables } from "../../src/utils/FileProcessor";
 import fs from 'fs';
 
-jest.mock('fs');
+jest.mock("fs", () => ({
+  promises: {
+    access: jest.fn()
+  },
+}));
 
 describe('FileProcessor', () => {
   describe('processFiles', () => {

@@ -3,6 +3,9 @@ import path from "path";
 import { getFilesByExtension } from "../../src/utils/ExtensionFilter";
 
 jest.mock("fs", () => ({
+  promises: {
+    access: jest.fn()
+  },
   readdirSync: jest.fn(),
   statSync: jest.fn()
 }));

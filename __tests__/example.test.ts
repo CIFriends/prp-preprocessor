@@ -2,6 +2,11 @@ import { processFiles } from '../src/utils/FileProcessor';
 import fs from 'fs';
 import { getFilesByExtension } from "../src/utils/ExtensionFilter";
 
+jest.mock("fs", () => ({
+  promises: {
+    access: jest.fn()
+  }
+}));
 const extension = ".prp";
 const dir = ".";
 describe('FileProcessor Example', () => {
