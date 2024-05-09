@@ -1,5 +1,5 @@
-name: "Preprocessor"
-description: "Example GitHub Action written in TypeScript"
+name: "prp-preprocessor"
+description: "A GitHub Action that replaces variables in files"
 branding:
   icon: "book-open"
   color: "white"
