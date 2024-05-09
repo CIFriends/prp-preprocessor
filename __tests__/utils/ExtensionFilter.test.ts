@@ -59,7 +59,8 @@ describe("getFilesByExtension", () => {
 
     const files = getFilesByExtension({ dir, extension, fsModule: mockedFs, pathModule: mockedPath });
 
-    expect(files).toEqual(["subdir\\file2.prp.ts", "file1.prp.ts"]);
+    const expectedArray = [path.join("subdir", "file2.prp.ts"), path.join("file1.prp.ts")];
+    expect(files).toEqual(expectedArray);
   });
 
   it("should throw an error when the directory does not exist", () => {
