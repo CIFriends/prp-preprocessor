@@ -34,7 +34,7 @@ The PRP Preprocessor accepts the following inputs:
 | `extension`      | The extension of the files to process.                                                                          | Yes      | .prp                                                            |
 | `includeSubDirs` | Whether to include subdirectories in the search for files.                                                      | No       | false                                                           |
 | `ignoredVars`    | A list of variables to ignore.                                                                                  | No       | []                                                              |
-| `ignoredDirs`    | A list of directories to ignore, according to the [.gitignore spec 2.22.1.](https://git-scm.com/docs/gitignore) | No       | ["node_modules",".git",".github","__tests__",".vscode",".idea"] |
+| `ignoredDirs`    | A list of directories to ignore, according to the [.gitignore spec 2.22.1.](https://git-scm.com/docs/gitignore) | No       | `["node_modules",".git",".github","__tests__",".vscode",".idea"]` |
 | `encodings`      | The encoding to use when reading and writing files.                                                             | No       | utf8                                                            |
 
 ## Outputs
