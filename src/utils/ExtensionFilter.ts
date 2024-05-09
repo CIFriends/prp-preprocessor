@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import ignore from "ignore";
+import ignore, { Ignore } from "ignore";
 import * as core from "@actions/core";
 
 /**
@@ -23,7 +23,7 @@ export function getFilesByExtension(params: GetFilesParams): string[] {
   }
   // Convert the wildcard pattern to a regular expression
   const extensionRegex: RegExp = generateRegex(extension + ".*");
-  const ig = ignore().add(ignoredDir);
+  const ig: Ignore = ignore().add(ignoredDir);
   const files: string[] = [];
 
   const dirs: fs.Dirent[] = getSubItems();
