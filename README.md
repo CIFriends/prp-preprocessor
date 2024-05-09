@@ -13,7 +13,7 @@ use it:
 ```yaml
 steps:
   - name: PRP Preprocessor
-    uses: brenoepics/prp-preprocessor@v1
+    uses: CIFriends/prp-preprocessor@v1
     with:
       rootDir: './example'
       extension: '.prp'
