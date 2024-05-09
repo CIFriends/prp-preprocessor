@@ -27,7 +27,7 @@ export function replaceVariables(
   variables: Map<string, string>,
   content: string
 ): string {
-  let newContent: string = content;
+  let newContent: string = content.toString();
   variables.forEach((value, key) => {
     newContent = newContent.replace(
       new RegExp(`\\{\\s*_\\s*${key.trim()}\\s*_\\s*\\}`, "g"),
