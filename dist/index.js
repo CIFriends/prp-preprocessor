@@ -25757,8 +25757,8 @@ exports.getFilesByExtension = getFilesByExtension;
  */
 function generateRegex(extension) {
     const extensionPattern = extension
-        .replace(".", "\\.")
-        .replace("*", ".*");
+        .replaceAll(".", "\\.")
+        .replaceAll("*", ".*");
     return new RegExp(extensionPattern + "$");
 }
 const ignoredDefault = [
