@@ -37,17 +37,9 @@ jobs:
         id: install
         run: pnpm install
 
-      - name: Check Format
-        id: pnpm-format-check
-        run: pnpm run format:check
-
-      - name: Lint
-        id: pnpm-lint
-        run: pnpm run lint
-
       - name: Test
         id: pnpm-ci-test
-        run: pnpm run test
+        run: pnpm jest --coverage
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
