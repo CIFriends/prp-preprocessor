@@ -1,8 +1,18 @@
-# PRP Preprocessor
+<div align="center">
+<a href="https://github.com/CIFriends">
+    <img src="https://raw.githubusercontent.com/CIFriends/prp-preprocessor/main/.github/cifriends-no-bg.svg" alt="Logo" width="300px">
+</a>
 
-The PRP Preprocessor is a GitHub Action that allows you to replace variables in a text file. The variables are defined
-in a map and can be used in the text file with the following syntax: `{_ variable _}`. Spaces are allowed around the
-variable name.
+ # prp-preprocessor
+ 
+ A versatile GitHub Action that enables variable replacement in files using a simple `{_ variable _}` syntax.
+
+![Release](https://img.shields.io/github/v/release/CIFriends/prp-preprocessor?include_prereleases&sort=semver&logo=github)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/cifriends/prp-preprocessor/ci.yml?logo=github)
+![GitHub Issues or Pull Requests](https://img.shields.io/github/issues/cifriends/prp-preprocessor?logo=github)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=CIFriends_prp-preprocessor&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=CIFriends_prp-preprocessor)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=CIFriends_prp-preprocessor&metric=coverage)](https://sonarcloud.io/summary/new_code?id=CIFriends_prp-preprocessor)
+</div>
 
 ## Installation
 
@@ -18,11 +28,6 @@ steps:
       rootDir: './example'
 ```
 
-## Usage
-
-> [!NOTE]
-> TODO
-
 ## Inputs
 
 The PRP Preprocessor accepts the following inputs:
@@ -35,10 +40,6 @@ The PRP Preprocessor accepts the following inputs:
 | `ignoredVars`    | A list of variables to ignore.                                                                                  | No       | []                                                              |
 | `ignoredDirs`    | A list of directories to ignore, according to the [.gitignore spec 2.22.1.](https://git-scm.com/docs/gitignore) | No       | `["node_modules",".git",".github","__tests__",".vscode",".idea"]` |
 | `encodings`      | The encoding to use when reading and writing files.                                                             | No       | utf8                                                            |
-
-## Outputs
-
-The PRP Preprocessor does not produce any outputs.
 
 ## License
 
