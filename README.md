@@ -1,11 +1,11 @@
 <div align="center">
 <a href="https://github.com/CIFriends">
-    <img src="https://raw.githubusercontent.com/CIFriends/prp-preprocessor/main/.github/cifriends-no-bg.svg" alt="Logo" width="300px">
+    <img src="https://raw.githubusercontent.com/CIFriends/prp-preprocessor/main/.github/cifriends-no-bg.svg" alt="Logo" width="200px">
 </a>
 
  # prp-preprocessor
  
- A versatile GitHub Action that enables variable replacement in files using a simple `{_ variable _}` syntax.
+ _A versatile GitHub Action that enables variable replacement in files using a simple_ `{_ variable _}` _syntax._
 
 ![Release](https://img.shields.io/github/v/release/CIFriends/prp-preprocessor?include_prereleases&sort=semver&logo=github)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/cifriends/prp-preprocessor/ci.yml?logo=github)
