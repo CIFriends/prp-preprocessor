@@ -1,7 +1,7 @@
 {
-  "name": "gh-action-example",
+  "name": "prp-preprocessor",
   "version": "1.0.0",
-  "description": "",
+  "description": "A GitHub Action that preprocesses files",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist pnpm-lock.yaml node_modules",
@@ -13,13 +13,23 @@
     "lint": "eslint --cache --cache-strategy content --report-unused-disable-directives .",
     "package": "pnpm ncc build src/index.ts -o dist --source-map --license licenses.txt",
     "package:watch": "pnpm run package --watch",
-    "test": "pnpm jest --coverage --verbose",
+    "test": "pnpm jest --coverage",
     "prepublishOnly": "pnpm run clean && pnpm install && pnpm run build",
-    "preflight": "pnpm install && pnpm run format:write && pnpm run lint && pnpm run test && pnpm run package",
+    "preflight": "pnpm install && pnpm run format:write && pnpm run lint && pnpm run package",
     "prepare": "husky"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "github",
+    "action",
+    "preprocessor",
+    "replace",
+    "variables"
+  ],
+  "author": "Breno A.",
+  "homepage": "https://github.com/CIFriends/prp-preprocessor#readme",
+  "bugs": {
+    "url": "https://github.com/CIFriends/prp-preprocessor/issues"
+  },
   "license": "Apache-2.0",
   "packageManager": "pnpm@9.0.6",
   "jest": {

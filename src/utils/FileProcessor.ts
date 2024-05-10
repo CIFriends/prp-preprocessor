@@ -1,5 +1,9 @@
 import fs from "fs";
 
+/**
+ * Process files and replace variables
+ * @param params - Files parameters see {@link FilesParams}
+ */
 export function processFiles(params: FilesParams): void {
   const { files, encodings, variables, fsModule = fs, extension } = params;
 
@@ -23,6 +27,12 @@ export function processFiles(params: FilesParams): void {
   }
 }
 
+/**
+ * Replace variables in content
+ * @param variables - Map of variables
+ * @param content - Content to replace variables
+ * @returns {string} Content with replaced variables
+ */
 export function replaceVariables(
   variables: Map<string, string>,
   content: string

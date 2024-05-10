@@ -16,6 +16,10 @@ export function getEnvVariables(ignored: string[]): Map<string, string> {
   );
 }
 
+/**
+ * Get all input parameters
+ * @returns {InputParams} Input parameters
+ */
 export function getInputParams(): InputParams {
   const rootDir: string = core.getInput("rootDir", required);
   const extension: string = core.getInput("extension", required);

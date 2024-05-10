@@ -72,15 +72,6 @@ export function getFilesByExtension(params: GetFilesParams): string[] {
   }
 }
 
-interface GetFilesParams {
-  dir: string;
-  extension: string;
-  includeSubDir?: boolean;
-  ignoredDir?: string[];
-  fsModule?: typeof fs;
-  pathModule?: typeof path;
-}
-
 /**
  * Generate a regular expression with a wildcard pattern
  * @param extension
@@ -100,3 +91,12 @@ const ignoredDefault: string[] = [
   ".vscode",
   ".idea"
 ];
+
+interface GetFilesParams {
+  dir: string;
+  extension: string;
+  includeSubDir?: boolean;
+  ignoredDir?: string[];
+  fsModule?: typeof fs;
+  pathModule?: typeof path;
+}

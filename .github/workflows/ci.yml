@@ -67,6 +67,5 @@ jobs:
         id: process
         with:
             rootDir: './example'
-
         env:
           EXAMPLE: 'World'
