@@ -29,6 +29,23 @@ describe("getFilesByExtension", () => {
     expect(files).toEqual([]);
   });
 
+  it("should return an empty array when the directory is in the ignored list", () => {
+    const dir = "node_modules";
+    const extension = ".prp";
+
+    mockedFs.readdirSync.mockReturnValue([
+      {
+        name: "file1.prp.ts",
+        isDirectory: () => false,
+        isFile: () => true
+      }
+    ] as fs.Dirent[]);
+
+    const files = getFilesByExtension({ dir, extension, fsModule: mockedFs, pathModule: mockedPath, ignoredDir: [dir] });
+
+    expect(files).toEqual([]);
+  });
+
   it("should return files from subdirectories", () => {
     const dir = ".";
     const extension = ".prp";
