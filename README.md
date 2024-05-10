@@ -20,7 +20,7 @@ To install the PRP Preprocessor, you can add it as a step in your GitHub Actions
 Here's an example of how to
 use it:
 
-```yaml
+```yml
 steps:
   - name: PRP Preprocessor
     uses: CIFriends/prp-preprocessor@v1
