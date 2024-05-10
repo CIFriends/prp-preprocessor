@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 jobs:
-  test-typescript:
+  sonar:
     name: TypeScript Tests
     runs-on: ubuntu-latest
 
