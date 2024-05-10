@@ -16,7 +16,6 @@ steps:
     uses: CIFriends/prp-preprocessor@v1
     with:
       rootDir: './example'
-      extension: '.prp'
 ```
 
 ## Usage
