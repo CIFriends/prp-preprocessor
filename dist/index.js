@@ -25784,6 +25784,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.replaceVariables = exports.processFiles = void 0;
 const fs_1 = __importDefault(__nccwpck_require__(7147));
+/**
+ * Process files and replace variables
+ * @param params - Files parameters see {@link FilesParams}
+ */
 function processFiles(params) {
     const { files, encodings, variables, fsModule = fs_1.default, extension } = params;
     files.forEach(file => {
@@ -25802,6 +25806,12 @@ function processFiles(params) {
     }
 }
 exports.processFiles = processFiles;
+/**
+ * Replace variables in content
+ * @param variables - Map of variables
+ * @param content - Content to replace variables
+ * @returns {string} Content with replaced variables
+ */
 function replaceVariables(variables, content) {
     let newContent = content.toString();
     variables.forEach((value, key) => {
@@ -25857,6 +25867,10 @@ function getEnvVariables(ignored) {
         .map(([key, value]) => [key, value?.toString() ?? ""]));
 }
 exports.getEnvVariables = getEnvVariables;
+/**
+ * Get all input parameters
+ * @returns {InputParams} Input parameters
+ */
 function getInputParams() {
     const rootDir = core.getInput("rootDir", required);
     const extension = core.getInput("extension", required);
