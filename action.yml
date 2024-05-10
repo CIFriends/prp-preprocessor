@@ -1,8 +1,8 @@
 name: "prp-preprocessor"
 description: "A GitHub Action that replaces variables in files"
 branding:
-  icon: "book-open"
-  color: "white"
+  icon: "edit"
+  color: "orange"
 inputs:
   rootDir:
     description: "Root directory"
