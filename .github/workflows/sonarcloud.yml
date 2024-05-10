@@ -14,13 +14,15 @@ permissions:
 
 jobs:
   sonar:
-    name: TypeScript Tests
+    name: SonarCloud Static Analysis
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         id: checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Install pnpm
         id: setup-pnpm
