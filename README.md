@@ -1,6 +1,6 @@
 <div align="center">
 <a href="https://github.com/CIFriends">
-    <img src="https://raw.githubusercontent.com/CIFriends/prp-preprocessor/main/.github/cifriends-no-bg.svg" alt="Logo" width="200px">
+    <img src="https://raw.githubusercontent.com/CIFriends/brandkit/main/no-bg/cifriends.svg" alt="Logo" width="200px">
 </a>
 
  # prp-preprocessor
