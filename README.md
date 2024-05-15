@@ -3,7 +3,7 @@
     <img src="https://raw.githubusercontent.com/CIFriends/brandkit/main/no-bg/cifriends.svg" alt="Logo" width="200px">
 </a>
 
- # {prp-preprocessor}
+ # prp-preprocessor
  
  _A versatile GitHub Action that enables variable replacement in files using a simple_ `{_ variable _}` _syntax._
 
