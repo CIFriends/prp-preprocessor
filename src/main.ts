@@ -59,15 +59,19 @@ export function run(inputParams: InputParams): void {
  * @param {string} commitMessage - The commit message.
  * @returns {void} Resolves when the changes are pushed.
  */
-function pushChanges(
+export function pushChanges(
   git: SimpleGit,
   inputParams: InputParams,
   commitMessage: string
 ): void {
-  git
+  void git
     .addConfig("user.name", inputParams.userName)
-    .addConfig("user.email", inputParams.userEmail)
-    .commit(commitMessage)
+    .addConfig("user.email", inputParams.userEmail);
+  git.commit(commitMessage).catch((err: unknown) => {
+    core.error(`Error committing files!`);
+    if (err instanceof Error) core.error(err.message);
+  });
+  git
     .push()
     .then(() => {
       core.info("Files committed successfully!");
