@@ -31856,7 +31856,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.run = void 0;
+exports.pushChanges = exports.run = void 0;
 const core = __importStar(__nccwpck_require__(9093));
 const ExtensionFilter_1 = __nccwpck_require__(1919);
 const texts_1 = __nccwpck_require__(974);
@@ -31910,10 +31910,15 @@ exports.run = run;
  * @returns {void} Resolves when the changes are pushed.
  */
 function pushChanges(git, inputParams, commitMessage) {
-    git
+    void git
         .addConfig("user.name", inputParams.userName)
-        .addConfig("user.email", inputParams.userEmail)
-        .commit(commitMessage)
+        .addConfig("user.email", inputParams.userEmail);
+    git.commit(commitMessage).catch((err) => {
+        core.error(`Error committing files!`);
+        if (err instanceof Error)
+            core.error(err.message);
+    });
+    git
         .push()
         .then(() => {
         core.info("Files committed successfully!");
@@ -31929,6 +31934,7 @@ function pushChanges(git, inputParams, commitMessage) {
             core.error(err.message);
     });
 }
+exports.pushChanges = pushChanges;
 
 
 /***/ }),
