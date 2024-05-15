@@ -32,6 +32,7 @@ const inputParams: InputParams = {
 beforeEach(() => {
   jest.clearAllMocks();
   gitMock = {
+    add: jest.fn().mockImplementation(() => gitMock),
     addConfig: jest.fn().mockImplementation(() => gitMock),
     commit: jest.fn().mockImplementation(() => Promise.resolve()),
     push: jest.fn().mockImplementation(() => Promise.resolve())
@@ -58,4 +59,17 @@ test("pushChanges should commit and push changes successfully", async () => {
   expect(gitMock.addConfig).toHaveBeenNthCalledWith(2, "user.email", inputParams.userEmail);
   expect(gitMock.commit).toHaveBeenCalledWith("Test commit message");
   expect(gitMock.push).toHaveBeenCalled();
+});
+
+test("run should call processFiles with git mock", () => {
+  const mockedFiles = ["file1.ts", "file2.ts"];
+  mockedGetFilesByExtension.mockReturnValue(mockedFiles);
+  run(inputParams);
+  expect(mockedProcessFiles).toHaveBeenCalledWith({
+    git: gitMock,
+    files: mockedFiles,
+    variables: inputParams.envVars,
+    encodings: inputParams.encodings,
+    extension: inputParams.extension
+  });
 });
