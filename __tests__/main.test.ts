@@ -14,6 +14,8 @@ const mockedGetFilesByExtension = getFilesByExtension as jest.MockedFunction<typ
 const mockedProcessFiles = processFiles as jest.MockedFunction<typeof processFiles>;
 const inputParams: InputParams = {
   rootDir: "/root",
+  userEmail: "",
+  userName: "",
   extension: ".ts",
   message: "Committing {_amount_} files with extension {_extension_} in directory {_rootDir_}",
   envVars: new Map(),

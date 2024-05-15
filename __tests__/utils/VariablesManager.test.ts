@@ -30,6 +30,10 @@ describe("VariableManager", () => {
       const mockedCore = core as jest.Mocked<typeof core>;
       mockedCore.getInput.mockImplementation((name: string) => {
         switch (name) {
+          case "userEmail":
+            return "";
+          case "userName":
+            return "";
           case "rootDir":
             return "/root/dir";
           case "commitMessage":
@@ -46,6 +50,8 @@ describe("VariableManager", () => {
       mockedCore.getMultilineInput.mockReturnValue(["VAR1", "VAR2"]);
       process.env = { VAR1: "value1", VAR2: "value2" };
       const expected: InputParams = {
+        userEmail: "",
+        userName: "",
         rootDir: "/root/dir",
         message: "chore: process {_amount_} PRP files in {_rootDir_}",
         extension: ".ts",
