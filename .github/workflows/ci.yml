@@ -66,6 +66,7 @@ jobs:
         uses: ./ # Uses an action in the root directory
         id: process
         with:
-            rootDir: './example'
+            rootDir: '.'
+            ignoredDirs: 'example/**'
         env:
           prpTitle: 'prp-preprocessor'
