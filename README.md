@@ -16,7 +16,7 @@
 
 ## Installation
 
-To install the PRP Preprocessor, you can add it as a step in your GitHub Actions workflow.
+To install the PRP Preprocessor, you can add it as a step in your [GitHub Actions](https://github.com/features/actions) workflow.
 Here's an example of how to
 use it:
 
