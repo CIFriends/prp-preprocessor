@@ -31869,7 +31869,7 @@ const simple_git_1 = __importDefault(__nccwpck_require__(729));
  * @returns {void} Resolves when the action is complete.
  */
 function run(inputParams) {
-    const { rootDir, extension, message, envVars, ignoredDir, includeSubDir, encodings } = inputParams;
+    const { rootDir, extension, ignoredDir, includeSubDir } = inputParams;
     core.debug((0, texts_1.SEARCH_TEXT)(extension, rootDir));
     const files = (0, ExtensionFilter_1.getFilesByExtension)({
         dir: path_1.default.join(rootDir),
@@ -31882,25 +31882,30 @@ function run(inputParams) {
         return;
     }
     const git = (0, simple_git_1.default)(process.cwd());
-    (0, FileProcessor_1.processFiles)({ git, files, variables: envVars, encodings, extension });
+    (0, FileProcessor_1.processFiles)({
+        git,
+        files,
+        variables: inputParams.envVars,
+        encodings: inputParams.encodings,
+        extension
+    });
     const messageVariables = new Map([
         ["extension", extension],
         ["rootDir", rootDir],
         ["amount", files.length.toString()]
     ]);
-    const commitMessage = (0, FileProcessor_1.replaceVariables)(messageVariables, message);
+    const commitMessage = (0, FileProcessor_1.replaceVariables)(messageVariables, inputParams.message);
     if (!commitMessage) {
         core.warning("No commit message provided!");
         return;
     }
     git
-        .addConfig("user.name", "actions-user")
-        .addConfig("user.email", "actions@github.com")
+        //TODO: .addConfig("user.name", "actions-user")
+        .addConfig("user.email", inputParams.userEmail)
         .commit(commitMessage)
+        .push()
         .then(() => {
-        void git.push().then(() => {
-            core.info("Files committed successfully!");
-        });
+        core.info("Files committed successfully!");
     })
         .catch((err) => {
         throw err;
@@ -32177,6 +32182,7 @@ function getInputParams() {
     const includeSubDir = core.getBooleanInput("includeSubDirs", required);
     const ignoredVars = core.getMultilineInput("ignoredVars");
     const ignoredDir = core.getMultilineInput("ignoredDirs");
+    const userEmail = core.getInput("userEmail", required);
     const encodings = core.getInput("encodings");
     const envVars = getEnvVariables(ignoredVars);
     return {
@@ -32187,6 +32193,7 @@ function getInputParams() {
         ignoredDir,
         envVars,
         includeSubDir,
+        userEmail,
         encodings
     };
 }
