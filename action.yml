@@ -12,6 +12,10 @@ inputs:
     description: "Preprocess files with this pre-extension"
     required: true
     default: ".prp"
+  commitMessage:
+    description: "Commit message"
+    required: true
+    default: "chore: process {_amount_} PRP files"
   encoding:
     description: "Encoding of the files"
     required: true

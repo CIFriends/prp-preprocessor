@@ -23,6 +23,7 @@ export function getEnvVariables(ignored: string[]): Map<string, string> {
 export function getInputParams(): InputParams {
   const rootDir: string = core.getInput("rootDir", required);
   const extension: string = core.getInput("extension", required);
+  const message: string = core.getInput("commitMessage", required);
   const includeSubDir: boolean = core.getBooleanInput(
     "includeSubDirs",
     required
@@ -36,6 +37,7 @@ export function getInputParams(): InputParams {
   return {
     rootDir,
     extension,
+    message,
     ignoredVars,
     ignoredDir,
     envVars,
@@ -47,6 +49,7 @@ export function getInputParams(): InputParams {
 export interface InputParams {
   rootDir: string;
   extension: string;
+  message: string;
   ignoredVars: string[];
   ignoredDir: string[];
   includeSubDir: boolean;

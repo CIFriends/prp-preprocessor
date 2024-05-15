@@ -1,15 +1,17 @@
 import fs from "fs";
+import { SimpleGit } from "simple-git";
+import * as core from "@actions/core";
 
 /**
  * Process files and replace variables
  * @param params - Files parameters see {@link FilesParams}
  */
 export function processFiles(params: FilesParams): void {
-  const { files, encodings, variables, fsModule = fs, extension } = params;
+  const { files, encodings, git, variables, fsModule = fs, extension } = params;
 
-  files.forEach(file => {
+  for (const file of files) {
     processFile(file);
-  });
+  }
 
   function processFile(file: string) {
     const readFile: string = fsModule.readFileSync(file, {
@@ -24,6 +26,16 @@ export function processFiles(params: FilesParams): void {
     const newFile: string = file.replace(extension, "");
 
     fs.writeFileSync(newFile, content, { encoding: encodings });
+
+    if (!git) {
+      core.info(`Skipping git add for file: ${newFile}`);
+      return;
+    }
+
+    gitAdd(git, newFile).catch((err: unknown) => {
+      core.error(`GIT Error adding file: ${newFile}`);
+      core.error(err as Error);
+    });
   }
 }
 
@@ -47,10 +59,26 @@ export function replaceVariables(
   return newContent;
 }
 
+/**
+ * Add file to git
+ * @param git - SimpleGit instance
+ * @param newFile - FileName to add
+ * @returns {Promise<string>} Promise that resolves when file is added
+ * @throws {Error} Error adding file to git
+ */
+function gitAdd(git: SimpleGit, newFile: string): Promise<string> {
+  return git.add(newFile, err => {
+    if (err) {
+      throw new Error(`Error adding file: ${newFile}`);
+    }
+  });
+}
+
 export interface FilesParams {
   files: string[];
   variables: Map<string, string>;
   extension: string;
+  git?: SimpleGit;
   encodings?: BufferEncoding;
   fsModule?: typeof fs;
 }

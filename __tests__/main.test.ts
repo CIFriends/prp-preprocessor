@@ -15,6 +15,7 @@ const mockedProcessFiles = processFiles as jest.MockedFunction<typeof processFil
 const inputParams: InputParams = {
   rootDir: "/root",
   extension: ".ts",
+  message: "Committing {_amount_} files with extension {_extension_} in directory {_rootDir_}",
   envVars: new Map(),
   ignoredDir: [],
   ignoredVars: [],
