@@ -4,7 +4,7 @@ import { InputParams } from "./utils/VariableManager";
 import { SEARCH_TEXT } from "./utils/texts";
 import { processFiles, replaceVariables } from "./utils/FileProcessor";
 import path from "path";
-import simpleGit, { SimpleGit } from "simple-git";
+import simpleGit, { GitError, SimpleGit } from "simple-git";
 
 /**
  * The main function for the action.
@@ -49,6 +49,21 @@ export function run(inputParams: InputParams): void {
     return;
   }
 
+  pushChanges(git, inputParams, commitMessage);
+}
+
+/**
+ * Pushes changes to the repository.
+ * @param {SimpleGit} git - The git instance.
+ * @param {InputParams} inputParams - The input parameters for the action.
+ * @param {string} commitMessage - The commit message.
+ * @returns {void} Resolves when the changes are pushed.
+ */
+function pushChanges(
+  git: SimpleGit,
+  inputParams: InputParams,
+  commitMessage: string
+): void {
   git
     .addConfig("user.name", inputParams.userName)
     .addConfig("user.email", inputParams.userEmail)
@@ -58,6 +73,14 @@ export function run(inputParams: InputParams): void {
       core.info("Files committed successfully!");
     })
     .catch((err: unknown) => {
-      throw err;
+      if (
+        err instanceof GitError &&
+        err.message.includes("nothing to commit")
+      ) {
+        core.info("No changes to commit!");
+        return;
+      }
+      core.error(`Error committing files!`);
+      if (err instanceof Error) core.error(err.message);
     });
 }

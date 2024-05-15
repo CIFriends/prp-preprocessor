@@ -31862,7 +31862,7 @@ const ExtensionFilter_1 = __nccwpck_require__(1919);
 const texts_1 = __nccwpck_require__(974);
 const FileProcessor_1 = __nccwpck_require__(5990);
 const path_1 = __importDefault(__nccwpck_require__(1017));
-const simple_git_1 = __importDefault(__nccwpck_require__(729));
+const simple_git_1 = __importStar(__nccwpck_require__(729));
 /**
  * The main function for the action.
  * @param {InputParams} inputParams - The input parameters for the action.
@@ -31899,6 +31899,17 @@ function run(inputParams) {
         core.warning("No commit message provided!");
         return;
     }
+    pushChanges(git, inputParams, commitMessage);
+}
+exports.run = run;
+/**
+ * Pushes changes to the repository.
+ * @param {SimpleGit} git - The git instance.
+ * @param {InputParams} inputParams - The input parameters for the action.
+ * @param {string} commitMessage - The commit message.
+ * @returns {void} Resolves when the changes are pushed.
+ */
+function pushChanges(git, inputParams, commitMessage) {
     git
         .addConfig("user.name", inputParams.userName)
         .addConfig("user.email", inputParams.userEmail)
@@ -31908,10 +31919,16 @@ function run(inputParams) {
         core.info("Files committed successfully!");
     })
         .catch((err) => {
-        throw err;
+        if (err instanceof simple_git_1.GitError &&
+            err.message.includes("nothing to commit")) {
+            core.info("No changes to commit!");
+            return;
+        }
+        core.error(`Error committing files!`);
+        if (err instanceof Error)
+            core.error(err.message);
     });
 }
-exports.run = run;
 
 
 /***/ }),
