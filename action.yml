@@ -19,7 +19,7 @@ inputs:
   userEmail:
     description: "User email"
     required: true
-    default: "cifriends@breno.tech"
+    default: "actions@github.com"
   userName:
     description: "User name"
     required: true
