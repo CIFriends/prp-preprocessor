@@ -31896,7 +31896,9 @@ function run(inputParams) {
     git
         .commit(commitMessage)
         .then(() => {
-        core.info("Files committed successfully!");
+        void git.push().then(() => {
+            core.info("Files committed successfully!");
+        });
     })
         .catch((err) => {
         throw err;
