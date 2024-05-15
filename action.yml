@@ -20,6 +20,10 @@ inputs:
     description: "User email"
     required: true
     default: "cifriends@breno.tech"
+  userName:
+    description: "User name"
+    required: true
+    default: "CI Friends"
   encoding:
     description: "Encoding of the files"
     required: true

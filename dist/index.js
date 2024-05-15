@@ -31900,7 +31900,7 @@ function run(inputParams) {
         return;
     }
     git
-        //TODO: .addConfig("user.name", "actions-user")
+        .addConfig("user.name", inputParams.userName)
         .addConfig("user.email", inputParams.userEmail)
         .commit(commitMessage)
         .push()
@@ -32183,6 +32183,7 @@ function getInputParams() {
     const ignoredVars = core.getMultilineInput("ignoredVars");
     const ignoredDir = core.getMultilineInput("ignoredDirs");
     const userEmail = core.getInput("userEmail", required);
+    const userName = core.getInput("userName", required);
     const encodings = core.getInput("encodings");
     const envVars = getEnvVariables(ignoredVars);
     return {
@@ -32194,6 +32195,7 @@ function getInputParams() {
         envVars,
         includeSubDir,
         userEmail,
+        userName,
         encodings
     };
 }

@@ -50,7 +50,7 @@ export function run(inputParams: InputParams): void {
   }
 
   git
-    //TODO: .addConfig("user.name", "actions-user")
+    .addConfig("user.name", inputParams.userName)
     .addConfig("user.email", inputParams.userEmail)
     .commit(commitMessage)
     .push()

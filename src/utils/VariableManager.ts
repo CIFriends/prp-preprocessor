@@ -31,6 +31,7 @@ export function getInputParams(): InputParams {
   const ignoredVars: string[] = core.getMultilineInput("ignoredVars");
   const ignoredDir: string[] = core.getMultilineInput("ignoredDirs");
   const userEmail: string = core.getInput("userEmail", required);
+  const userName: string = core.getInput("userName", required);
   const encodings: BufferEncoding = core.getInput(
     "encodings"
   ) as BufferEncoding;
@@ -44,6 +45,7 @@ export function getInputParams(): InputParams {
     envVars,
     includeSubDir,
     userEmail,
+    userName,
     encodings
   };
 }
@@ -57,5 +59,6 @@ export interface InputParams {
   includeSubDir: boolean;
   envVars: Map<string, string>;
   userEmail: string;
+  userName: string;
   encodings: BufferEncoding;
 }
