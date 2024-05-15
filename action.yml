@@ -16,6 +16,10 @@ inputs:
     description: "Commit message"
     required: true
     default: "chore: process {_amount_} PRP files"
+  userEmail:
+    description: "User email"
+    required: true
+    default: "cifriends@breno.tech"
   encoding:
     description: "Encoding of the files"
     required: true

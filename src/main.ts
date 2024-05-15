@@ -12,15 +12,7 @@ import simpleGit, { SimpleGit } from "simple-git";
  * @returns {void} Resolves when the action is complete.
  */
 export function run(inputParams: InputParams): void {
-  const {
-    rootDir,
-    extension,
-    message,
-    envVars,
-    ignoredDir,
-    includeSubDir,
-    encodings
-  } = inputParams;
+  const { rootDir, extension, ignoredDir, includeSubDir } = inputParams;
   core.debug(SEARCH_TEXT(extension, rootDir));
   const files: string[] = getFilesByExtension({
     dir: path.join(rootDir),
@@ -35,7 +27,13 @@ export function run(inputParams: InputParams): void {
   }
 
   const git: SimpleGit = simpleGit(process.cwd());
-  processFiles({ git, files, variables: envVars, encodings, extension });
+  processFiles({
+    git,
+    files,
+    variables: inputParams.envVars,
+    encodings: inputParams.encodings,
+    extension
+  });
 
   const messageVariables: Map<string, string> = new Map([
     ["extension", extension],
@@ -44,7 +42,7 @@ export function run(inputParams: InputParams): void {
   ]);
   const commitMessage: string | undefined = replaceVariables(
     messageVariables,
-    message
+    inputParams.message
   );
   if (!commitMessage) {
     core.warning("No commit message provided!");
@@ -52,13 +50,12 @@ export function run(inputParams: InputParams): void {
   }
 
   git
-    .addConfig("user.name", "actions-user")
-    .addConfig("user.email", "actions@github.com")
+    //TODO: .addConfig("user.name", "actions-user")
+    .addConfig("user.email", inputParams.userEmail)
     .commit(commitMessage)
+    .push()
     .then(() => {
-      void git.push().then(() => {
-        core.info("Files committed successfully!");
-      });
+      core.info("Files committed successfully!");
     })
     .catch((err: unknown) => {
       throw err;
