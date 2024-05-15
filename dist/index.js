@@ -31894,6 +31894,8 @@ function run(inputParams) {
         return;
     }
     git
+        .addConfig("user.name", "actions-user")
+        .addConfig("user.email", "actions@github.com")
         .commit(commitMessage)
         .then(() => {
         void git.push().then(() => {
