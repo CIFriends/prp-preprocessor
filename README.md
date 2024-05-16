@@ -14,7 +14,9 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=CIFriends_prp-preprocessor&metric=coverage)](https://sonarcloud.io/summary/new_code?id=CIFriends_prp-preprocessor)
 </div>
 
-{_ alertMessage _}
+'> [!IMPORTANT]
+> This file was generated from a .prp'
+
 > Read our [docs](https://github.com/CIFriends/prp-preprocessor/wiki)
 
 
