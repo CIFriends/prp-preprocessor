@@ -3,7 +3,7 @@
     <img src="https://raw.githubusercontent.com/CIFriends/brandkit/main/no-bg/cifriends.svg" alt="Logo" width="200px">
 </a>
 
- # prp-preprocessor 1
+ # prp-preprocessor
  
  _A versatile GitHub Action that enables variable replacement in files using a simple_ `{_ variable _}` _syntax._
 
@@ -14,7 +14,14 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=CIFriends_prp-preprocessor&metric=coverage)](https://sonarcloud.io/summary/new_code?id=CIFriends_prp-preprocessor)
 </div>
 
+{_ alertMessage _}
+> Read our [docs](https://github.com/CIFriends/prp-preprocessor/wiki)
+
+
 ## Installation
+
+> [!TIP]
+> [How to Use](https://github.com/CIFriends/prp-preprocessor/wiki/How-to-Use)
 
 To install the PRP Preprocessor, you can add it as a step in your [GitHub Actions](https://github.com/features/actions) workflow.
 Here's an example of how to
@@ -30,16 +37,7 @@ steps:
 
 ## Inputs
 
-The PRP Preprocessor accepts the following inputs:
-
-| Name             | Description                                                                                                     | Required | Default                                                         |
-|------------------|-----------------------------------------------------------------------------------------------------------------|----------|-----------------------------------------------------------------|
-| `rootDir`        | The root directory to start searching for files.                                                                | Yes      | .                                                               |
-| `extension`      | The extension of the files to process.                                                                          | Yes      | .prp                                                            |
-| `includeSubDirs` | Whether to include subdirectories in the search for files.                                                      | No       | false                                                           |
-| `ignoredVars`    | A list of variables to ignore.                                                                                  | No       | []                                                              |
-| `ignoredDirs`    | A list of directories to ignore, according to the [.gitignore spec 2.22.1.](https://git-scm.com/docs/gitignore) | No       | `["node_modules",".git",".github","__tests__",".vscode",".idea"]` |
-| `encodings`      | The encoding to use when reading and writing files.                                                             | No       | utf8                                                            |
+Inputs can be found at [here](https://github.com/CIFriends/prp-preprocessor/wiki/Inputs).
 
 ## License
 
