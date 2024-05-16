@@ -32,7 +32,7 @@ use it:
 ```yml
 steps:
   - name: PRP Preprocessor
-    uses: CIFriends/prp-preprocessor@dev
+    uses: CIFriends/prp-preprocessor@main
     with:
       rootDir: './example'
 ```
