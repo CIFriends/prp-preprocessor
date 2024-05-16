@@ -41,6 +41,10 @@ steps:
 
 Inputs can be found at [here](https://github.com/CIFriends/prp-preprocessor/wiki/Inputs).
 
+## Show your support
+
+If you've found this project useful, please consider giving it a ⭐ on GitHub. This helps to spread the awareness of the project and is a great way to show your support!
+
 ## License
 
 This project is licensed under the Apache-2.0 License.
