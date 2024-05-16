@@ -32180,6 +32180,9 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getInputParams = exports.getEnvVariables = void 0;
 const core = __importStar(__nccwpck_require__(9093));
 const ExtensionFilter_1 = __nccwpck_require__(1919);
+/**
+ * Required input parameters
+ */
 const required = { required: true };
 /**
  * Get all environment variables

@@ -2,6 +2,9 @@ import * as core from "@actions/core";
 import { BufferEncoding } from "@vercel/ncc/dist/ncc/loaders/typescript/lib/typescript";
 import { ignoredDefault } from "./ExtensionFilter";
 
+/**
+ * Required input parameters
+ */
 const required: { required: boolean } = { required: true };
 
 /**
