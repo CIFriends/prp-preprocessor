@@ -55,8 +55,8 @@ test("run should warn when no files are found", () => {
 test("pushChanges should commit and push changes successfully", async () => {
   pushChanges(gitMock, inputParams, "Test commit message");
   expect(gitMock.addConfig).toHaveBeenCalledTimes(2);
-  expect(gitMock.addConfig).toHaveBeenNthCalledWith(1, "user.name", inputParams.userName);
-  expect(gitMock.addConfig).toHaveBeenNthCalledWith(2, "user.email", inputParams.userEmail);
+  expect(gitMock.addConfig).toHaveBeenNthCalledWith(1, "user.name", inputParams.userName, undefined, "local");
+  expect(gitMock.addConfig).toHaveBeenNthCalledWith(2, "user.email", inputParams.userEmail, undefined, "local");
   expect(gitMock.commit).toHaveBeenCalledWith("Test commit message");
   expect(gitMock.push).toHaveBeenCalled();
 });
