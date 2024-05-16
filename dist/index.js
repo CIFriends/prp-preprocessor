@@ -32083,8 +32083,8 @@ exports.run = run;
  */
 async function pushChanges(git, inputParams, commitMessage) {
     await git
-        .addConfig("user.name", inputParams.userName, undefined, "local")
-        .addConfig("user.email", inputParams.userEmail, undefined, "local");
+        .addConfig("user.name", inputParams.userName, undefined, "worktree")
+        .addConfig("user.email", inputParams.userEmail, undefined, "worktree");
     await git.commit(commitMessage).catch((err) => {
         core.error(`Error committing files!`);
         if (err instanceof Error)
