@@ -19,7 +19,7 @@ export async function processFiles(params: FilesParams): Promise<void> {
     });
 
     if (!readFile) {
-      throw new Error(`Error reading file: ${file}`);
+      return Promise.reject(new Error(`Error reading file: ${file}`));
     }
 
     const content: string = replaceVariables(variables, readFile);
@@ -29,10 +29,11 @@ export async function processFiles(params: FilesParams): Promise<void> {
 
     if (!git) {
       core.info(`Skipping git add for file: ${newFile}`);
-      return;
+      return Promise.resolve();
     }
 
     await gitAdd(git, newFile);
+    return Promise.resolve();
   }
 }
 
