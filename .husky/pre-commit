@@ -1,1 +1,1 @@
-#!/bin/sh# Check if there are changes in /distpnpm preflightif git diff --quiet --exit-code -- dist/; then  # No changes in /dist  echo "No changes in /dist"else  # Changes detected in /dist  echo "Changes detected in /dist, adding to commit"  git add dist/  git commit --amend --no-edit -m "chore: bump dist"fi
+pnpm preflight
