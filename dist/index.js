@@ -31859,7 +31859,6 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.pushChanges = exports.run = void 0;
 const core = __importStar(__nccwpck_require__(9093));
 const ExtensionFilter_1 = __nccwpck_require__(1919);
-const texts_1 = __nccwpck_require__(974);
 const FileProcessor_1 = __nccwpck_require__(5990);
 const path_1 = __importDefault(__nccwpck_require__(1017));
 const simple_git_1 = __importStar(__nccwpck_require__(729));
@@ -31870,7 +31869,7 @@ const simple_git_1 = __importStar(__nccwpck_require__(729));
  */
 async function run(inputParams) {
     const { rootDir, extension, ignoredDir, includeSubDir } = inputParams;
-    core.debug((0, texts_1.SEARCH_TEXT)(extension, rootDir));
+    core.debug(`Searching for files with extension: ${extension} in directory: ${rootDir}...`);
     const files = (0, ExtensionFilter_1.getFilesByExtension)({
         dir: path_1.default.join(rootDir),
         extension,
@@ -32223,19 +32222,6 @@ function getInputParams() {
     };
 }
 exports.getInputParams = getInputParams;
-
-
-/***/ }),
-
-/***/ 974:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SEARCH_TEXT = void 0;
-const SEARCH_TEXT = (extension, rootDir) => `Searching for files with extension: ${extension} in directory: ${rootDir}...`;
-exports.SEARCH_TEXT = SEARCH_TEXT;
 
 
 /***/ }),
