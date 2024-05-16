@@ -29,8 +29,8 @@ export function getInputParams(): InputParams {
     "includeSubDirs",
     required
   );
-  const ignoredVars: string[] = core.getMultilineInput("ignoredVars", required);
-  const ignoredDir: string[] = core.getMultilineInput("ignoredDirs", required);
+  const ignoredVars: string[] = core.getMultilineInput("ignoredVars");
+  const ignoredDir: string[] = core.getMultilineInput("ignoredDirs");
   ignoredDir.push(...ignoredDefault);
   const userEmail: string = core.getInput("userEmail", required);
   const userName: string = core.getInput("userName", required);

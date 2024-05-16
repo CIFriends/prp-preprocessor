@@ -32202,8 +32202,8 @@ function getInputParams() {
     const extension = core.getInput("extension", required);
     const message = core.getInput("commitMessage", required);
     const includeSubDir = core.getBooleanInput("includeSubDirs", required);
-    const ignoredVars = core.getMultilineInput("ignoredVars", required);
-    const ignoredDir = core.getMultilineInput("ignoredDirs", required);
+    const ignoredVars = core.getMultilineInput("ignoredVars");
+    const ignoredDir = core.getMultilineInput("ignoredDirs");
     ignoredDir.push(...ExtensionFilter_1.ignoredDefault);
     const userEmail = core.getInput("userEmail", required);
     const userName = core.getInput("userName", required);
