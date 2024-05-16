@@ -70,4 +70,5 @@ jobs:
             ignoredDirs: 'example/**'
         env:
           prpTitle: 'prp-preprocessor'
-          currentVersion: '0.0.1'
+          currentVersion: '1'
+          
