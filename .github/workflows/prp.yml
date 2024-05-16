@@ -1,0 +1,30 @@
+name: Run PRP
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+    test-action:
+      runs-on: ubuntu-latest
+      name: Test action
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Process files
+        uses: ./ # Uses an action in the root directory
+        id: process
+        with:
+            rootDir: '.'
+            ignoredDirs: 'example/**'
+        env:
+          prpTitle: 'prp-preprocessor'
+          currentVersion: '1'
+          alertMessage: |
+                    > [!IMPORTANT]
+                    > This file was generated from a .prp
