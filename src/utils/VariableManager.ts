@@ -35,8 +35,7 @@ export function getInputParams(): InputParams {
   const userEmail: string = core.getInput("userEmail", required);
   const userName: string = core.getInput("userName", required);
   const encodings: BufferEncoding = core.getInput(
-    "encodings",
-    required
+    "encodings"
   ) as BufferEncoding;
   const envVars: Map<string, string> = getEnvVariables(ignoredVars);
   return {

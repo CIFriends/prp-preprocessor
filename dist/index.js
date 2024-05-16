@@ -32207,7 +32207,7 @@ function getInputParams() {
     ignoredDir.push(...ExtensionFilter_1.ignoredDefault);
     const userEmail = core.getInput("userEmail", required);
     const userName = core.getInput("userName", required);
-    const encodings = core.getInput("encodings", required);
+    const encodings = core.getInput("encodings");
     const envVars = getEnvVariables(ignoredVars);
     return {
         rootDir,
