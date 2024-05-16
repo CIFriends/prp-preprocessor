@@ -32,7 +32,7 @@ use it:
 ```yml
 steps:
   - name: PRP Preprocessor
-    uses: CIFriends/prp-preprocessor@vmain
+    uses: CIFriends/prp-preprocessor@dev
     with:
       rootDir: './example'
 ```
@@ -41,7 +41,9 @@ steps:
 
 Inputs can be found at [here](https://github.com/CIFriends/prp-preprocessor/wiki/Inputs).
 
-## Show your support
+## Contributing
+
+We welcome contributions to this project! Please read our [Contributing Guide](CONTRIBUTING.md) for more information on how to contribute.
 
 If you've found this project useful, please consider giving it a ⭐ on GitHub. This helps to spread the awareness of the project and is a great way to show your support!
 
