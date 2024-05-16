@@ -1,7 +1,9 @@
 import { FilesParams, processFiles, replaceVariables } from "../../src/utils/FileProcessor";
 import fs from "fs";
-import simpleGit, { SimpleGit } from "simple-git";
+import simpleGit, { GitError, SimpleGit } from "simple-git";
+import * as core from "@actions/core";
 
+jest.mock("@actions/core");
 jest.mock("fs", () => ({
   promises: {
     access: jest.fn()
@@ -10,7 +12,7 @@ jest.mock("fs", () => ({
   writeFileSync: jest.fn()
 }));
 jest.mock("simple-git");
-
+const mockedCore = core as jest.Mocked<typeof core>;
 const mockedSimpleGit = simpleGit as jest.MockedFunction<typeof simpleGit>;
 let gitMock: jest.Mocked<SimpleGit>;
 
@@ -79,7 +81,9 @@ describe("FileProcessor", () => {
 
       expect(result).toBe("Hello, world!");
     });
+  });
 
+  describe("gitAdd", () => {
     it("git add and commit", () => {
       const mockReadFileSync = jest.spyOn(fs, "readFileSync");
       const mockWriteFileSync = jest.spyOn(fs, "writeFileSync");
@@ -99,7 +103,31 @@ describe("FileProcessor", () => {
 
       expect(mockReadFileSync).toHaveBeenCalledWith("test.prp.txt", { encoding: "utf-8" });
       expect(mockWriteFileSync).toHaveBeenCalledWith("test.txt", "Hello, Breno!", { encoding: "utf-8" });
-      expect(gitMock.add).toHaveBeenCalledWith("test.txt", expect.any(Function));
+      expect(gitMock.add).toHaveBeenCalledWith("test.txt");
+    });
+    it("git add catch error", async () => {
+      const mockReadFileSync = jest.spyOn(fs, "readFileSync");
+      const mockWriteFileSync = jest.spyOn(fs, "writeFileSync");
+      mockReadFileSync.mockReturnValue("Hello, {_name_}!");
+      mockWriteFileSync.mockImplementation(() => {});
+
+      gitMock.add.mockRejectedValue(new GitError(undefined, "Error adding file"));
+
+      const params: FilesParams = {
+        files: ["test.prp.txt"],
+        variables: new Map([["name", "Breno"]]),
+        encodings: "utf-8",
+        extension: ".prp",
+        git: gitMock
+      };
+
+      await processFiles(params);
+
+      expect(mockReadFileSync).toHaveBeenCalledWith("test.prp.txt", { encoding: "utf-8" });
+      expect(mockWriteFileSync).toHaveBeenCalledWith("test.txt", "Hello, Breno!", { encoding: "utf-8" });
+      expect(gitMock.add).toHaveBeenCalledWith("test.txt");
+      expect(mockedCore.error).toHaveBeenCalledWith("GIT Error adding file: test.txt");
+      expect(mockedCore.error).toHaveBeenCalledTimes(2);
     });
   });
 });

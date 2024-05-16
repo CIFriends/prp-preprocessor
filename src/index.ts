@@ -6,7 +6,7 @@ import { getInputParams } from "./utils/VariableManager";
 import * as core from "@actions/core";
 
 try {
-  run(getInputParams());
+  void run(getInputParams());
 } catch (error) {
   if (error instanceof Error) core.setFailed(error.message);
 }

@@ -11,7 +11,7 @@ import simpleGit, { GitError, SimpleGit } from "simple-git";
  * @param {InputParams} inputParams - The input parameters for the action.
  * @returns {void} Resolves when the action is complete.
  */
-export function run(inputParams: InputParams): void {
+export async function run(inputParams: InputParams): Promise<void> {
   const { rootDir, extension, ignoredDir, includeSubDir } = inputParams;
   core.debug(SEARCH_TEXT(extension, rootDir));
   const files: string[] = getFilesByExtension({
@@ -27,7 +27,7 @@ export function run(inputParams: InputParams): void {
   }
 
   const git: SimpleGit = simpleGit(process.cwd());
-  processFiles({
+  await processFiles({
     git,
     files,
     variables: inputParams.envVars,

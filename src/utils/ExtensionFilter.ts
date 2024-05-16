@@ -83,7 +83,7 @@ function generateRegex(extension: string): RegExp {
   return new RegExp(extensionPattern + "$");
 }
 
-const ignoredDefault: string[] = [
+export const ignoredDefault: string[] = [
   "node_modules",
   ".git",
   ".github",

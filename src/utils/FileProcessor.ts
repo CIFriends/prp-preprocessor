@@ -6,14 +6,14 @@ import * as core from "@actions/core";
  * Process files and replace variables
  * @param params - Files parameters see {@link FilesParams}
  */
-export function processFiles(params: FilesParams): void {
+export async function processFiles(params: FilesParams): Promise<void> {
   const { files, encodings, git, variables, fsModule = fs, extension } = params;
 
   for (const file of files) {
-    processFile(file);
+    await processFile(file);
   }
 
-  function processFile(file: string) {
+  async function processFile(file: string) {
     const readFile: string = fsModule.readFileSync(file, {
       encoding: encodings as BufferEncoding
     });
@@ -32,10 +32,7 @@ export function processFiles(params: FilesParams): void {
       return;
     }
 
-    gitAdd(git, newFile).catch((err: unknown) => {
-      core.error(`GIT Error adding file: ${newFile}`);
-      core.error(err as Error);
-    });
+    await gitAdd(git, newFile);
   }
 }
 
@@ -63,13 +60,13 @@ export function replaceVariables(
  * Add file to git
  * @param git - SimpleGit instance
  * @param newFile - FileName to add
- * @returns {Promise<string>} Promise that resolves when file is added
- * @throws {Error} Error adding file to git
+ * @returns {Promise<void>} Promise that resolves when file is added
  */
-function gitAdd(git: SimpleGit, newFile: string): Promise<string> {
-  return git.add(newFile, err => {
+async function gitAdd(git: SimpleGit, newFile: string): Promise<void> {
+  await git.add(newFile).catch((err: unknown) => {
+    core.error(`GIT Error adding file: ${newFile}`);
     if (err) {
-      throw new Error(`Error adding file: ${newFile}`);
+      core.error(err as Error);
     }
   });
 }

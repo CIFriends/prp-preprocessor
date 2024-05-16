@@ -1,5 +1,6 @@
 import * as core from "@actions/core";
 import { BufferEncoding } from "@vercel/ncc/dist/ncc/loaders/typescript/lib/typescript";
+import { ignoredDefault } from "./ExtensionFilter";
 
 const required: { required: boolean } = { required: true };
 
@@ -30,6 +31,7 @@ export function getInputParams(): InputParams {
   );
   const ignoredVars: string[] = core.getMultilineInput("ignoredVars");
   const ignoredDir: string[] = core.getMultilineInput("ignoredDirs");
+  ignoredDir.push(...ignoredDefault);
   const userEmail: string = core.getInput("userEmail", required);
   const userName: string = core.getInput("userName", required);
   const encodings: BufferEncoding = core.getInput(
