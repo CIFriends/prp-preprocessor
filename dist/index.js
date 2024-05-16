@@ -32103,16 +32103,17 @@ async function processFiles(params) {
             encoding: encodings
         });
         if (!readFile) {
-            throw new Error(`Error reading file: ${file}`);
+            return Promise.reject(new Error(`Error reading file: ${file}`));
         }
         const content = replaceVariables(variables, readFile);
         const newFile = file.replace(extension, "");
         fs_1.default.writeFileSync(newFile, content, { encoding: encodings });
         if (!git) {
             core.info(`Skipping git add for file: ${newFile}`);
-            return;
+            return Promise.resolve();
         }
         await gitAdd(git, newFile);
+        return Promise.resolve();
     }
 }
 exports.processFiles = processFiles;
@@ -32201,12 +32202,12 @@ function getInputParams() {
     const extension = core.getInput("extension", required);
     const message = core.getInput("commitMessage", required);
     const includeSubDir = core.getBooleanInput("includeSubDirs", required);
-    const ignoredVars = core.getMultilineInput("ignoredVars");
-    const ignoredDir = core.getMultilineInput("ignoredDirs");
+    const ignoredVars = core.getMultilineInput("ignoredVars", required);
+    const ignoredDir = core.getMultilineInput("ignoredDirs", required);
     ignoredDir.push(...ExtensionFilter_1.ignoredDefault);
     const userEmail = core.getInput("userEmail", required);
     const userName = core.getInput("userName", required);
-    const encodings = core.getInput("encodings");
+    const encodings = core.getInput("encodings", required);
     const envVars = getEnvVariables(ignoredVars);
     return {
         rootDir,

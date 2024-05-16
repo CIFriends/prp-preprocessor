@@ -48,7 +48,7 @@ describe("FileProcessor", () => {
       expect(mockWriteFileSync).toHaveBeenCalledWith("test", "Hello, Breno!", { encoding: "utf-8" });
     });
 
-    it("throws error when file cannot be read", () => {
+    it("throws error when file cannot be read", async () => {
       const mockReadFileSync = jest.spyOn(fs, "readFileSync");
       mockReadFileSync.mockReturnValue("");
 
@@ -59,7 +59,7 @@ describe("FileProcessor", () => {
         extension: ".txt"
       };
 
-      expect(() => processFiles(params)).toThrow("Error reading file: test.txt");
+      await expect(processFiles(params)).rejects.toThrow("Error reading file: test.txt");
     });
   });
 
@@ -84,7 +84,7 @@ describe("FileProcessor", () => {
   });
 
   describe("gitAdd", () => {
-    it("git add and commit", () => {
+    it("git add and commit", async () => {
       const mockReadFileSync = jest.spyOn(fs, "readFileSync");
       const mockWriteFileSync = jest.spyOn(fs, "writeFileSync");
       mockReadFileSync.mockReturnValue("Hello, {_name_}!");
@@ -99,7 +99,7 @@ describe("FileProcessor", () => {
         git: gitMock
       };
 
-      processFiles(params);
+      await processFiles(params);
 
       expect(mockReadFileSync).toHaveBeenCalledWith("test.prp.txt", { encoding: "utf-8" });
       expect(mockWriteFileSync).toHaveBeenCalledWith("test.txt", "Hello, Breno!", { encoding: "utf-8" });
@@ -109,7 +109,8 @@ describe("FileProcessor", () => {
       const mockReadFileSync = jest.spyOn(fs, "readFileSync");
       const mockWriteFileSync = jest.spyOn(fs, "writeFileSync");
       mockReadFileSync.mockReturnValue("Hello, {_name_}!");
-      mockWriteFileSync.mockImplementation(() => {});
+      mockWriteFileSync.mockImplementation(() => {
+      });
 
       gitMock.add.mockRejectedValue(new GitError(undefined, "Error adding file"));
 
