@@ -32085,17 +32085,14 @@ function pushChanges(git, inputParams, commitMessage) {
     void git
         .addConfig("user.name", inputParams.userName, undefined, "local")
         .addConfig("user.email", inputParams.userEmail, undefined, "local");
-    git.commit(commitMessage).catch((err) => {
+    void git.commit(commitMessage).catch((err) => {
         core.error(`Error committing files!`);
         if (err instanceof Error)
             core.error(err.message);
     });
-    git
-        .push()
-        .then(() => {
+    void git.push().then(() => {
         core.info("Files committed successfully!");
-    })
-        .catch((err) => {
+    }, (err) => {
         if (err instanceof simple_git_1.GitError &&
             err.message.includes("nothing to commit")) {
             core.info("No changes to commit!");

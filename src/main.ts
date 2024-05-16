@@ -68,16 +68,15 @@ export function pushChanges(
   void git
     .addConfig("user.name", inputParams.userName, undefined, "local")
     .addConfig("user.email", inputParams.userEmail, undefined, "local");
-  git.commit(commitMessage).catch((err: unknown) => {
+  void git.commit(commitMessage).catch((err: unknown) => {
     core.error(`Error committing files!`);
     if (err instanceof Error) core.error(err.message);
   });
-  git
-    .push()
-    .then(() => {
+  void git.push().then(
+    () => {
       core.info("Files committed successfully!");
-    })
-    .catch((err: unknown) => {
+    },
+    (err: unknown) => {
       if (
         err instanceof GitError &&
         err.message.includes("nothing to commit")
@@ -87,5 +86,6 @@ export function pushChanges(
       }
       core.error(`Error committing files!`);
       if (err instanceof Error) core.error(err.message);
-    });
+    }
+  );
 }
