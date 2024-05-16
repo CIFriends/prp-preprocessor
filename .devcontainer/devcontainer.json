@@ -3,10 +3,11 @@
   "features": {
     "ghcr.io/dhoeric/features/act:1": {}
   },
+  "postCreateCommand": "pnpm install",
   "customizations": {
     "vscode": {
       "extensions": [
-        "cschleiden.vscode-github-actions",
+        "github.vscode-github-actions",
         "redhat.vscode-yaml"
       ]
     }

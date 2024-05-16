@@ -58,6 +58,7 @@ export async function run(inputParams: InputParams): Promise<void> {
  * @param {SimpleGit} git - The git instance.
  * @param {InputParams} inputParams - The input parameters for the action.
  * @param {string} commitMessage - The commit message.
+ * @throws {Error} Throws an error if the changes cannot be pushed.
  * @returns {void} Resolves when the changes are pushed.
  */
 export async function pushChanges(
@@ -85,7 +86,7 @@ export async function pushChanges(
         return;
       }
       core.error(`Error committing files!`);
-      if (err instanceof Error) core.error(err.message);
+      throw err;
     }
   );
 }
