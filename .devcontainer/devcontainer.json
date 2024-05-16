@@ -3,6 +3,7 @@
   "features": {
     "ghcr.io/dhoeric/features/act:1": {}
   },
+  "postCreateCommand": "pnpm install",
   "customizations": {
     "vscode": {
       "extensions": [
