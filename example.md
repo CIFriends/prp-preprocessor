@@ -1,1 +1,1 @@
-version: {_ currentVersion _}
+version: 1

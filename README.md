@@ -3,7 +3,7 @@
     <img src="https://raw.githubusercontent.com/CIFriends/brandkit/main/no-bg/cifriends.svg" alt="Logo" width="200px">
 </a>
 
- # {_ prpTitle _} {_currentVersion_}
+ # prp-preprocessor 1
  
  _A versatile GitHub Action that enables variable replacement in files using a simple_ `{_ variable _}` _syntax._
 
@@ -23,7 +23,7 @@ use it:
 ```yml
 steps:
   - name: PRP Preprocessor
-    uses: CIFriends/prp-preprocessor@v{_currentVersion_}
+    uses: CIFriends/prp-preprocessor@v1
     with:
       rootDir: './example'
 ```
