@@ -1,7 +1,6 @@
 import * as core from "@actions/core";
 import { getFilesByExtension } from "./utils/ExtensionFilter";
 import { InputParams } from "./utils/VariableManager";
-import { SEARCH_TEXT } from "./utils/texts";
 import { processFiles, replaceVariables } from "./utils/FileProcessor";
 import path from "path";
 import simpleGit, { GitError, SimpleGit } from "simple-git";
@@ -13,7 +12,9 @@ import simpleGit, { GitError, SimpleGit } from "simple-git";
  */
 export async function run(inputParams: InputParams): Promise<void> {
   const { rootDir, extension, ignoredDir, includeSubDir } = inputParams;
-  core.debug(SEARCH_TEXT(extension, rootDir));
+  core.debug(
+    `Searching for files with extension: ${extension} in directory: ${rootDir}...`
+  );
   const files: string[] = getFilesByExtension({
     dir: path.join(rootDir),
     extension,
