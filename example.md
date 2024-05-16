@@ -1,0 +1,1 @@
+version: {_ currentVersion _}
