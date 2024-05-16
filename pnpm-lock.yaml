@@ -17,6 +17,9 @@ importers:
       ignore:
         specifier: 5.3.1
         version: 5.3.1
+      lodash.escaperegexp:
+        specifier: 4.1.2
+        version: 4.1.2
       simple-git:
         specifier: 3.24.0
         version: 3.24.0
@@ -24,6 +27,9 @@ importers:
       '@types/jest':
         specifier: ^29.5.12
         version: 29.5.12
+      '@types/lodash.escaperegexp':
+        specifier: 4.1.9
+        version: 4.1.9
       '@types/node':
         specifier: 20.12.11
         version: 20.12.11
@@ -509,6 +515,12 @@ packages:
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
+
+  '@types/lodash.escaperegexp@4.1.9':
+    resolution: {integrity: sha512-CMQc8v16YzhnPZnMhYQuJUksI8BmL1jy/lHJkiXi4/t24Lx7Qvy7qxew1abrDJGa1T2i0NzLLaR27NK1/qp5Ow==}
+
+  '@types/lodash@4.17.1':
+    resolution: {integrity: sha512-X+2qazGS3jxLAIz5JDXDzglAF3KpijdhFxlf/V1+hEsOUc+HnWi81L/uv/EvGuV90WY+7mPGFCUDGfQC3Gj95Q==}
 
   '@types/node@20.12.11':
     resolution: {integrity: sha512-vDg9PZ/zi+Nqp6boSOT7plNuthRugEKixDv5sFTIpkE89MmNtEArAShI4mxuX2+UrLEe9pxC1vm2cjm9YlWbJw==}
@@ -1345,6 +1357,9 @@ packages:
   locate-path@6.0.0:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
+
+  lodash.escaperegexp@4.1.2:
+    resolution: {integrity: sha512-TM9YBvyC84ZxE3rgfefxUWiQKLilstD6k7PTGt6wfbtXF8ixIJLOL3VYyV/z+ZiPLsVxAsKAFVwWlWeb2Y8Yyw==}
 
   lodash.memoize@4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
@@ -2451,6 +2466,12 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
+  '@types/lodash.escaperegexp@4.1.9':
+    dependencies:
+      '@types/lodash': 4.17.1
+
+  '@types/lodash@4.17.1': {}
+
   '@types/node@20.12.11':
     dependencies:
       undici-types: 5.26.5
@@ -3492,6 +3513,8 @@ snapshots:
   locate-path@6.0.0:
     dependencies:
       p-locate: 5.0.0
+
+  lodash.escaperegexp@4.1.2: {}
 
   lodash.memoize@4.1.2: {}
 

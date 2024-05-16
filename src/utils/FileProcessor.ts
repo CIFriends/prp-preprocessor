@@ -1,6 +1,7 @@
 import fs from "fs";
 import { SimpleGit } from "simple-git";
 import * as core from "@actions/core";
+import escapeRegExp from "lodash.escaperegexp";
 
 /**
  * Process files and replace variables
@@ -50,7 +51,7 @@ export function replaceVariables(
   let newContent: string = content.toString();
   variables.forEach((value, key) => {
     newContent = newContent.replaceAll(
-      new RegExp(`\\{\\s*_\\s*${key.trim()}\\s*_\\s*\\}`, "g"),
+      new RegExp(`\\{\\s*_\\s*${escapeRegExp(key.trim())}\\s*_\\s*\\}`, "g"),
       value
     );
   });
