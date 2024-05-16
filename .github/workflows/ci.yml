@@ -1,13 +1,11 @@
-name: Continuous Integration
+name: Run Jest and Check Style
 
 on:
   workflow_dispatch:
+  pull_request:
   push:
     branches:
       - main
-
-permissions:
-  contents: write
 
 jobs:
   test-typescript:
@@ -45,30 +43,3 @@ jobs:
       - name: Test
         id: pnpm-ci-test
         run: pnpm run ci-test
-
-  test-action:
-    runs-on: ubuntu-latest
-    name: Test action
-    steps:
-      # To use this repository's private action,
-      # you must check out the repository
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install pnpm
-        id: setup-pnpm
-        uses: pnpm/action-setup@v3
-      - name: Install dependencies and build
-        run: pnpm run preflight
-      - name: Process files
-        uses: ./ # Uses an action in the root directory
-        id: process
-        with:
-            rootDir: '.'
-            ignoredDirs: 'example/**'
-        env:
-          prpTitle: 'prp-preprocessor'
-          currentVersion: '1'
-          alertMessage: |
-                    '> [!IMPORTANT]
-                    > This file was generated from a .prp'
-          
