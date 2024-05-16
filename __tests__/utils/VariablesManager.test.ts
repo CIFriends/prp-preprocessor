@@ -1,6 +1,7 @@
 import { getEnvVariables, getInputParams, InputParams } from "../../src/utils/VariableManager";
 import * as core from "@actions/core";
 import { BufferEncoding } from "@vercel/ncc/dist/ncc/loaders/typescript/lib/typescript";
+import { ignoredDefault } from "../../src/utils/ExtensionFilter";
 
 jest.mock("@actions/core");
 
@@ -47,7 +48,16 @@ describe("VariableManager", () => {
         }
       });
       mockedCore.getBooleanInput.mockReturnValue(true);
-      mockedCore.getMultilineInput.mockReturnValue(["VAR1", "VAR2"]);
+      mockedCore.getMultilineInput.mockImplementation((name: string) => {
+        switch (name) {
+          case "ignoredVars":
+            return ["VAR1", "VAR2"];
+          case "ignoredDirs":
+            return [];
+          default:
+            return [];
+        }
+      });
       process.env = { VAR1: "value1", VAR2: "value2" };
       const expected: InputParams = {
         userEmail: "",
@@ -56,7 +66,7 @@ describe("VariableManager", () => {
         message: "chore: process {_amount_} PRP files in {_rootDir_}",
         extension: ".ts",
         ignoredVars: ["VAR1", "VAR2"],
-        ignoredDir: ["VAR1", "VAR2"],
+        ignoredDir: [...ignoredDefault],
         envVars: new Map<string, string>(),
         includeSubDir: true,
         encodings: "utf8"
