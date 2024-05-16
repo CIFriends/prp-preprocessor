@@ -31910,8 +31910,8 @@ exports.run = run;
  */
 function pushChanges(git, inputParams, commitMessage) {
     void git
-        .addConfig("user.name", inputParams.userName)
-        .addConfig("user.email", inputParams.userEmail);
+        .addConfig("user.name", inputParams.userName, undefined, "local")
+        .addConfig("user.email", inputParams.userEmail, undefined, "local");
     git.commit(commitMessage).catch((err) => {
         core.error(`Error committing files!`);
         if (err instanceof Error)
