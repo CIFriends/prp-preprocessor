@@ -66,8 +66,8 @@ export function pushChanges(
   commitMessage: string
 ): void {
   void git
-    .addConfig("user.name", inputParams.userName)
-    .addConfig("user.email", inputParams.userEmail);
+    .addConfig("user.name", inputParams.userName, undefined, "local")
+    .addConfig("user.email", inputParams.userEmail, undefined, "local");
   git.commit(commitMessage).catch((err: unknown) => {
     core.error(`Error committing files!`);
     if (err instanceof Error) core.error(err.message);
