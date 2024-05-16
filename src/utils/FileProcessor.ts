@@ -25,7 +25,6 @@ export async function processFiles(params: FilesParams): Promise<void> {
 
     const content: string = replaceVariables(variables, readFile);
     const newFile: string = file.replace(extension, "");
-
     fs.writeFileSync(newFile, content, { encoding: encodings });
 
     if (!git) {

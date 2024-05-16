@@ -50,7 +50,7 @@ export async function run(inputParams: InputParams): Promise<void> {
     return;
   }
 
-  pushChanges(git, inputParams, commitMessage);
+  await pushChanges(git, inputParams, commitMessage);
 }
 
 /**
@@ -60,19 +60,19 @@ export async function run(inputParams: InputParams): Promise<void> {
  * @param {string} commitMessage - The commit message.
  * @returns {void} Resolves when the changes are pushed.
  */
-export function pushChanges(
+export async function pushChanges(
   git: SimpleGit,
   inputParams: InputParams,
   commitMessage: string
-): void {
-  void git
-    .addConfig("user.name", inputParams.userName, undefined, "local")
-    .addConfig("user.email", inputParams.userEmail, undefined, "local");
-  void git.commit(commitMessage).catch((err: unknown) => {
+): Promise<void> {
+  await git
+    .addConfig("user.name", inputParams.userName, undefined, "worktree")
+    .addConfig("user.email", inputParams.userEmail, undefined, "worktree");
+  await git.commit(commitMessage).catch((err: unknown) => {
     core.error(`Error committing files!`);
     if (err instanceof Error) core.error(err.message);
   });
-  void git.push().then(
+  await git.push().then(
     () => {
       core.info("Files committed successfully!");
     },

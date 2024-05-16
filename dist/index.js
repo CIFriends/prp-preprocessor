@@ -32071,7 +32071,7 @@ async function run(inputParams) {
         core.warning("No commit message provided!");
         return;
     }
-    pushChanges(git, inputParams, commitMessage);
+    await pushChanges(git, inputParams, commitMessage);
 }
 exports.run = run;
 /**
@@ -32081,16 +32081,16 @@ exports.run = run;
  * @param {string} commitMessage - The commit message.
  * @returns {void} Resolves when the changes are pushed.
  */
-function pushChanges(git, inputParams, commitMessage) {
-    void git
+async function pushChanges(git, inputParams, commitMessage) {
+    await git
         .addConfig("user.name", inputParams.userName, undefined, "local")
         .addConfig("user.email", inputParams.userEmail, undefined, "local");
-    void git.commit(commitMessage).catch((err) => {
+    await git.commit(commitMessage).catch((err) => {
         core.error(`Error committing files!`);
         if (err instanceof Error)
             core.error(err.message);
     });
-    void git.push().then(() => {
+    await git.push().then(() => {
         core.info("Files committed successfully!");
     }, (err) => {
         if (err instanceof simple_git_1.GitError &&
