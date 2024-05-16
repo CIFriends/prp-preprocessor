@@ -24,7 +24,7 @@ jobs:
             ignoredDirs: 'example/**'
         env:
           prpTitle: 'prp-preprocessor'
-          currentVersion: '1'
           alertMessage: |
                     > [!IMPORTANT]
                     > This file was generated from a .prp
+          currentVersion: '1'
