@@ -31814,7 +31814,7 @@ const main_1 = __nccwpck_require__(9356);
 const VariableManager_1 = __nccwpck_require__(5503);
 const core = __importStar(__nccwpck_require__(9093));
 try {
-    (0, main_1.run)((0, VariableManager_1.getInputParams)());
+    void (0, main_1.run)((0, VariableManager_1.getInputParams)());
 }
 catch (error) {
     if (error instanceof Error)
@@ -31868,7 +31868,7 @@ const simple_git_1 = __importStar(__nccwpck_require__(729));
  * @param {InputParams} inputParams - The input parameters for the action.
  * @returns {void} Resolves when the action is complete.
  */
-function run(inputParams) {
+async function run(inputParams) {
     const { rootDir, extension, ignoredDir, includeSubDir } = inputParams;
     core.debug((0, texts_1.SEARCH_TEXT)(extension, rootDir));
     const files = (0, ExtensionFilter_1.getFilesByExtension)({
@@ -31882,7 +31882,7 @@ function run(inputParams) {
         return;
     }
     const git = (0, simple_git_1.default)(process.cwd());
-    (0, FileProcessor_1.processFiles)({
+    await (0, FileProcessor_1.processFiles)({
         git,
         files,
         variables: inputParams.envVars,
@@ -31971,7 +31971,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getFilesByExtension = void 0;
+exports.ignoredDefault = exports.getFilesByExtension = void 0;
 const fs_1 = __importDefault(__nccwpck_require__(7147));
 const path_1 = __importDefault(__nccwpck_require__(1017));
 const ignore_1 = __importDefault(__nccwpck_require__(9910));
@@ -31982,7 +31982,7 @@ const core = __importStar(__nccwpck_require__(9093));
  * @param params
  */
 function getFilesByExtension(params) {
-    const { dir, extension, fsModule = fs_1.default, ignoredDir = ignoredDefault, includeSubDir = true, pathModule = path_1.default } = params;
+    const { dir, extension, fsModule = fs_1.default, ignoredDir = exports.ignoredDefault, includeSubDir = true, pathModule = path_1.default } = params;
     if (!dir || !extension) {
         throw new Error("Directory and extension are required");
     }
@@ -32042,7 +32042,7 @@ function generateRegex(extension) {
         .replaceAll("*", ".*");
     return new RegExp(extensionPattern + "$");
 }
-const ignoredDefault = [
+exports.ignoredDefault = [
     "node_modules",
     ".git",
     ".github",
@@ -32093,12 +32093,12 @@ const core = __importStar(__nccwpck_require__(9093));
  * Process files and replace variables
  * @param params - Files parameters see {@link FilesParams}
  */
-function processFiles(params) {
+async function processFiles(params) {
     const { files, encodings, git, variables, fsModule = fs_1.default, extension } = params;
     for (const file of files) {
-        processFile(file);
+        await processFile(file);
     }
-    function processFile(file) {
+    async function processFile(file) {
         const readFile = fsModule.readFileSync(file, {
             encoding: encodings
         });
@@ -32112,10 +32112,7 @@ function processFiles(params) {
             core.info(`Skipping git add for file: ${newFile}`);
             return;
         }
-        gitAdd(git, newFile).catch((err) => {
-            core.error(`GIT Error adding file: ${newFile}`);
-            core.error(err);
-        });
+        await gitAdd(git, newFile);
     }
 }
 exports.processFiles = processFiles;
@@ -32137,13 +32134,13 @@ exports.replaceVariables = replaceVariables;
  * Add file to git
  * @param git - SimpleGit instance
  * @param newFile - FileName to add
- * @returns {Promise<string>} Promise that resolves when file is added
- * @throws {Error} Error adding file to git
+ * @returns {Promise<void>} Promise that resolves when file is added
  */
-function gitAdd(git, newFile) {
-    return git.add(newFile, err => {
+async function gitAdd(git, newFile) {
+    await git.add(newFile).catch((err) => {
+        core.error(`GIT Error adding file: ${newFile}`);
         if (err) {
-            throw new Error(`Error adding file: ${newFile}`);
+            core.error(err);
         }
     });
 }
@@ -32182,6 +32179,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getInputParams = exports.getEnvVariables = void 0;
 const core = __importStar(__nccwpck_require__(9093));
+const ExtensionFilter_1 = __nccwpck_require__(1919);
 const required = { required: true };
 /**
  * Get all environment variables
@@ -32205,6 +32203,7 @@ function getInputParams() {
     const includeSubDir = core.getBooleanInput("includeSubDirs", required);
     const ignoredVars = core.getMultilineInput("ignoredVars");
     const ignoredDir = core.getMultilineInput("ignoredDirs");
+    ignoredDir.push(...ExtensionFilter_1.ignoredDefault);
     const userEmail = core.getInput("userEmail", required);
     const userName = core.getInput("userName", required);
     const encodings = core.getInput("encodings");
