@@ -51,7 +51,7 @@ steps:
 <summary>Workflow Diagram</summary>
 
 ```mermaid
-graph TD
+graph LR
     A[GitHub Workflow] --> B[Checkout Action]
     B --> C[PRP Preprocessor Action]
     C --> D{Files with .prp extension?}
