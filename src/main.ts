@@ -1,4 +1,5 @@
 import * as core from "@actions/core";
+import * as github from "@actions/github";
 import { getFilesByExtension } from "./utils/ExtensionFilter";
 import { InputParams } from "./utils/VariableManager";
 import { processFiles, replaceVariables } from "./utils/FileProcessor";
@@ -41,13 +42,16 @@ export async function run(inputParams: InputParams): Promise<void> {
     ["rootDir", rootDir],
     ["amount", files.length.toString()]
   ]);
-  const commitMessage: string | undefined = replaceVariables(
+  let commitMessage: string | undefined = replaceVariables(
     messageVariables,
     inputParams.message
   );
   if (!commitMessage) {
     core.warning("No commit message provided!");
     return;
+  }
+  if (inputParams.includeAuthor && github.context.actor.length > 0) {
+    commitMessage += `\n\n${getAuthor()}`;
   }
 
   await pushChanges(git, inputParams, commitMessage);
@@ -89,4 +93,12 @@ export async function pushChanges(
       throw err;
     }
   );
+}
+
+/**
+ * Get the author of the workflow run.
+ * @returns {string} Author string
+ */
+function getAuthor(): string {
+  return `Co-authored-by: ${github.context.actor} <${github.context.actor}@users.noreply.github.com>`;
 }

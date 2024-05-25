@@ -1,7 +1,7 @@
 {
   "name": "prp-preprocessor",
   "version": "1.0.0",
-  "description": "A GitHub Action that preprocesses files",
+  "description": "A versatile GitHub Action that enables variable replacement in files using a simple syntax.",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist pnpm-lock.yaml node_modules",
@@ -30,7 +30,7 @@
     "url": "https://github.com/CIFriends/prp-preprocessor/issues"
   },
   "license": "Apache-2.0",
-  "packageManager": "pnpm@9.0.6",
+  "packageManager": "pnpm@9.1.1",
   "jest": {
     "preset": "ts-jest",
     "verbose": true,

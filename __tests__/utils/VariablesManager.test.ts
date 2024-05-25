@@ -68,6 +68,7 @@ describe("VariableManager", () => {
         ignoredVars: ["VAR1", "VAR2"],
         ignoredDir: [...ignoredDefault],
         envVars: new Map<string, string>(),
+        includeAuthor: true,
         includeSubDir: true,
         encodings: "utf8"
       };

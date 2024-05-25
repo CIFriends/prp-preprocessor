@@ -26,6 +26,7 @@ const inputParams: InputParams = {
   ignoredDir: [],
   ignoredVars: [],
   includeSubDir: true,
+  includeAuthor: true,
   encodings: "utf8"
 };
 
