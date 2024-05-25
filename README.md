@@ -42,7 +42,7 @@ steps:
     # with:
     #  ref: "main" # uncomment this line to check out a specific branch
   - name: PRP Preprocessor
-    uses: CIFriends/prp-preprocessor@v1.0.0
+    uses: CIFriends/prp-preprocessor@
     env:
       exampleVar: "Hello, World! This is an example variable."
 ```
