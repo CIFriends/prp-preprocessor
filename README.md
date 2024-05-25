@@ -19,6 +19,12 @@ _A versatile GitHub Action that enables variable replacement in files using a si
 >
 > Read our [docs](https://github.com/CIFriends/prp-preprocessor/wiki)
 
+Are you tired of updating things like README version references, documentation, configuration files, and more on every
+release?
+
+_PRP automates this for you!
+With PRP, you can focus on your code while it takes care of the tedious updates._
+
 ## Installation
 
 > [!TIP]
@@ -56,6 +62,7 @@ graph TD
     G --> I[Push Changes]
     I --> J[End Workflow]
 ```
+
 </details>
 
 ## Usage
@@ -68,6 +75,7 @@ use it:
 <summary>Using a variable in a file</summary>
 
 `example.prp.json`
+
 ```json
 {
   "name": "{_ exampleVar _}"
@@ -77,11 +85,13 @@ use it:
 Output:
 
 `example.json`
+
 ```json
 {
   "name": "Hello, World! This is an example variable."
 }
 ```
+
 </details>
 
 ## Inputs
