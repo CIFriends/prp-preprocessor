@@ -1,7 +1,7 @@
 {
   "name": "prp-preprocessor",
   "version": "1.0.0",
-  "description": "A GitHub Action that preprocesses files",
+  "description": "A versatile GitHub Action that enables variable replacement in files using a simple syntax.",
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist pnpm-lock.yaml node_modules",
