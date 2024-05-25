@@ -14,7 +14,6 @@
     "package": "pnpm ncc build src/index.ts -o dist --source-map --license licenses.txt",
     "package:watch": "pnpm run package --watch",
     "test": "pnpm jest --coverage",
-    "prepublishOnly": "pnpm run clean && pnpm install && pnpm run build",
     "preflight": "pnpm install && pnpm run format:write && pnpm run lint && pnpm run package",
     "prepare": "husky"
   },
