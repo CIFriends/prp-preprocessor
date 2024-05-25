@@ -40,6 +40,23 @@ steps:
       exampleVar: "Hello, World! This is an example variable."
 ```
 
+<details>
+<summary>Workflow Diagram</summary>
+
+```mermaid
+graph TD
+    A[GitHub Workflow] --> B[Checkout Action]
+    B --> C[PRP Preprocessor Action]
+    C --> D{Files with .prp extension?}
+    D -->|Yes| E[Process Files]
+    E --> F[Replace Variables]
+    F --> G[Commit Changes]
+    D -->|No| H[End Workflow]
+    G --> I[Push Changes]
+    I --> J[End Workflow]
+```
+</details>
+
 ## Usage
 
 After installing the PRP Preprocessor, you can use it to replace variables in your `.prp.<any>` files.
@@ -68,7 +85,8 @@ Output:
 
 ## Inputs
 
-Inputs can be found at [here](https://github.com/CIFriends/prp-preprocessor/wiki/Inputs).
+You can find the list of inputs and their descriptions in the [action.yml](action.yml) file,
+or you can read the [docs](https://github.com/CIFriends/prp-preprocessor/wiki/Inputs).
 
 ## Contributing
 
