@@ -28,10 +28,15 @@ inputs:
     description: "Encoding of the files"
     required: true
     default: "utf8"
+
   ignoredVars:
     description: "Ignore these variables"
     required: false
     default: ""
+  includeAuthor:
+    description: "Include workflow co-author in prp commit"
+    required: false
+    default: "true"
   ignoredDirs:
     description: "Ignore these directories"
     required: false
@@ -40,7 +45,6 @@ inputs:
     description: "Include subdirectories"
     required: false
     default: "true"
-
 runs:
   using: "node20"
   main: "dist/index.js"

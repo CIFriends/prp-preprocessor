@@ -35,6 +35,7 @@ export function getInputParams(): InputParams {
   const ignoredVars: string[] = core.getMultilineInput("ignoredVars");
   const ignoredDir: string[] = core.getMultilineInput("ignoredDirs");
   ignoredDir.push(...ignoredDefault);
+  const includeAuthor: boolean = core.getBooleanInput("includeAuthor");
   const userEmail: string = core.getInput("userEmail", required);
   const userName: string = core.getInput("userName", required);
   const encodings: BufferEncoding = core.getInput(
@@ -48,6 +49,7 @@ export function getInputParams(): InputParams {
     ignoredVars,
     ignoredDir,
     envVars,
+    includeAuthor,
     includeSubDir,
     userEmail,
     userName,
@@ -61,6 +63,7 @@ export interface InputParams {
   message: string;
   ignoredVars: string[];
   ignoredDir: string[];
+  includeAuthor: boolean;
   includeSubDir: boolean;
   envVars: Map<string, string>;
   userEmail: string;
